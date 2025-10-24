@@ -1,26 +1,32 @@
+import java.util.Scanner;
+
 public class DogWalkCompany {
-    private int[] dogsPerHour;
-    public DogWalkCompany() {
-        dogsPerHour = new int[24];
+    private int[] schedule;
+    public DogWalkCompany(){
+        schedule = new int[24];
     }
-    public int addDogs(int hour, int numDogs) {
-        dogsPerHour[hour] += numDogs;
+    public DogWalkCompany(int[] schedule){
+        this.schedule = schedule;
+    }
+    public String toString(){
+        String s = "";
+        for (int i = 0; i < schedule.length; i++)
+            s = s + i + " " + schedule[i] + "\n";
+        return s;
+    }
+    public int addDogs(){
+        Scanner s = new Scanner(System.in);
+        System.out.println("What hour?");
+        int hour = s.nextInt();
+        System.out.println("How many dogs");
+        int dogs = s.nextInt();
+        schedule[hour] = dogs;
         return hour;
     }
-    public int numAvailableDogs(int hour) {
-        return dogsPerHour[hour];
+    public int numAvailableDogs(int hour){
+        return schedule[hour];
     }
-    public void updateDogs(int hour, int numWalked) {
-        dogsPerHour[hour] -= numWalked;
-        if (dogsPerHour[hour] < 0) {
-            dogsPerHour[hour] = 0;
-        }
-    }
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < dogsPerHour.length; i++) {
-            sb.append(i).append(":00 -> ").append(dogsPerHour[i]).append(" dogs\n");
-        }
-        return sb.toString();
+    public void updateDogs(int hour, int numofDogswalked){
+        schedule[hour] = schedule[hour] - numofDogswalked;
     }
 }
